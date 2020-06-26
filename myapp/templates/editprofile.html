@@ -1,0 +1,119 @@
+{% load static%}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Category</title>
+
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+    <!--Custom styles-->
+    <link rel="stylesheet" href="{% static 'css/register.css'%}" />
+
+    <script src="{% static 'js/register.js'%}"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            $('#edit').click(function() {
+
+                $('#edit').hide();
+                $('#update').show();
+                $("input[name = 'empid']").removeAttr("readonly");
+                $("input[name = 'name']").removeAttr("readonly");
+                $("input[name = 'email']").removeAttr("readonly");
+                $("input[name = 'phone']").removeAttr("readonly");
+                $("input[name = 'job']").removeAttr("readonly");
+                $("input[name = 'image_upload']").show();
+
+            });
+
+        });
+    </script>
+</head>
+
+<body>
+
+    <div class="container-fluid">
+
+        <!---navigation bar start--->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/myapp/register/">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/myapp/reg_log/">Register log</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!---navigation bar end-->
+
+        <!-- Registration start-->
+        <div class="row" style="margin-top: 5%; margin-right: 15%; margin-left: 15%; margin-bottom: 5%;">
+            <div class="col-md-3 d-md-none d-lg-block"></div>
+            <div class="col-md-6 col-sm-12 regborder">
+                <div style="margin: 5%;">
+                    <div class="headreg">
+                        <h2>Employee Registration</h2>
+                        <hr class="new2">
+                    </div>
+                    <form name="regForm" onsubmit="return validate()" action="/myapp/editprofile/" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div id="error_message">{{msg}}</div>
+                        <div id="error_message"></div>
+                        <img src="{{pro.image.url}}" alt="" style="height: 100px; width: 100px;">
+                        <div class="form-group">
+                            <input type="file" class="form-control-file" name="image_upload" style="display: none;" id="img">
+                        </div>
+                        <div class="form-group">
+                            <label>Employee Id</label>
+                            <input type="text" class="form-control" id="empid" name="empid" value="{{pro.employee_id}}" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" class="form-control" id="name" name="name" value="{{pro.name}}" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Email address</label>
+                            <input type="email" class="form-control" id="email" name="email" value="{{pro.email}}" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Phone</label>
+                            <input type="text" class="form-control" id="phone" name="phone" value="{{pro.phone}}" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Job position</label>
+                            <input type="text" class="form-control" id="job" name="job" value="{{pro.job}}" readonly>
+                        </div>
+                        <input type="submit" class="btn btn-success" value="Update" name="update" id="update">
+                        <input type="button" class="btn btn-primary" name="edit" value="edit" id="edit">
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-3 d-md-none d-lg-block"></div>
+        </div>
+        <!-- Registration end-->
+    </div>
+
+
+</body>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+</html>
